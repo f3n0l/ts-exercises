@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const schemas_1 = require("./schemas");
+const parser_1 = require("./parser");
+const userJSON = '{"id": 1, "username": "someName", "email": "test@test.com"}';
+const productJSON = '{"id": "123", "name": "product", "price": 30.20}';
+const user = (0, parser_1.validateAndParseJSON)(userJSON, schemas_1.UserSchema);
+const product = (0, parser_1.validateAndParseJSON)(productJSON, schemas_1.ProductSchema);
+console.log(user);
+console.log(product);
