@@ -94,4 +94,40 @@ export class BinarySearchTree {
         }
         return node.value;
     }
+
+     inOrderTraversal(callback: (value: number) => void): void {
+        this.inOrderTraversalRecursive(this.root, callback);
+    }
+
+    private inOrderTraversalRecursive(node: TreeNode | null, callback: (value: number) => void): void {
+        if (node !== null) {
+            this.inOrderTraversalRecursive(node.left, callback);
+            callback(node.value);
+            this.inOrderTraversalRecursive(node.right, callback);
+        }
+    }
+
+    preOrderTraversal(callback: (value: number) => void): void {
+        this.preOrderTraversalRecursive(this.root, callback);
+    }
+
+    private preOrderTraversalRecursive(node: TreeNode | null, callback: (value: number) => void): void {
+        if (node !== null) {
+            callback(node.value);
+            this.preOrderTraversalRecursive(node.left, callback);
+            this.preOrderTraversalRecursive(node.right, callback);
+        }
+    }
+
+    postOrderTraversal(callback: (value: number) => void): void {
+        this.postOrderTraversalRecursive(this.root, callback);
+    }
+
+    private postOrderTraversalRecursive(node: TreeNode | null, callback: (value: number) => void): void {
+        if (node !== null) {
+            this.postOrderTraversalRecursive(node.left, callback);
+            this.postOrderTraversalRecursive(node.right, callback);
+            callback(node.value);
+        }
+    }
 }
