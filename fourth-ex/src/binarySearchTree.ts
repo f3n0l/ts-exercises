@@ -60,5 +60,38 @@ export class BinarySearchTree {
         }
     }
 
-   
+      delete(value: number): void {
+        this.root = this.deleteNode(this.root, value);
+    }
+     private deleteNode(node: TreeNode | null, value: number): TreeNode | null {
+        if (node === null) {
+            return null;
+        }
+
+        if (value < node.value) {
+            node.left = this.deleteNode(node.left, value);
+        } else if (value > node.value) {
+            node.right = this.deleteNode(node.right, value);
+        } else {
+            if (node.left === null && node.right === null) {
+                node = null;
+            } else if (node.left === null) {
+                node = node.right;
+            } else if (node.right === null) {
+                node = node.left;
+            } else {
+                const minValue = this.findMinValue(node.right);
+                node.value = minValue;
+                node.right = this.deleteNode(node.right, minValue);
+            }
+        }
+
+        return node;
+    }
+      private findMinValue(node: TreeNode): number {
+        while (node.left !== null) {
+            node = node.left;
+        }
+        return node.value;
+    }
 }
